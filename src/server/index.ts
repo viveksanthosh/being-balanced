@@ -1,8 +1,9 @@
 import express from "express";
 import "dotenv/config";
 
+import routes from "./routes";
+
 import "./database";
 
 export const app = express();
-
-app.get("/api/test", (_, res) => res.json({ greeting: "Hello" }));
+app.use("/api", routes);
