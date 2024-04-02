@@ -1,8 +1,11 @@
-import mongoose from "mongoose";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
-const mongoHost = process.env.MONGODB_HOST;
-const dbName = process.env.DB_NAME;
+const queryClient = postgres({
+  database: process.env.DB_NAME,
+  host: "localhost",
+  port: 5444,
+  username: process.env.DB_USER,
+});
 
-mongoose
-  .connect(`${mongoHost}/${dbName}`)
-  .then(() => console.log("Connected!"));
+queryClient`select * from users`.then(console.log);
