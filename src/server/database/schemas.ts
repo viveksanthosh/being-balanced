@@ -1,40 +1,22 @@
-import { Schema } from "mongoose";
+import { Generated, Insertable, Selectable, Updateable } from "kysely";
 
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: [
-    {
-      type: Schema.ObjectId,
-      required: true,
-    },
-  ],
-});
+export interface Database {
+  users: UserTable;
+}
 
-const RolesSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+export interface UserTable {
+  id: Generated<number>;
 
-  resources: [
-    {
-      type: Schema.ObjectId,
-      required: true,
-    },
-  ],
-});
+  email: string;
+  password: string;
+}
 
-const ResourcesSchema = new Schema({
-  resource: {
-    type: String,
-    required: true,
-  },
-  role: { type: String, enum: ["user", "admin", "editor"] },
-});
+// You should not use the table schema interfaces directly. Instead, you should
+// use the `Selectable`, `Insertable` and `Updateable` wrappers. These wrappers
+// make sure that the correct types are used in each operation.
+//
+// Most of the time you should trust the type inference and not use explicit
+// types at all. These types can be useful when typing function arguments.
+export type Person = Selectable<UserTable>;
+export type NewPerson = Insertable<UserTable>;
+export type PersonUpdate = Updateable<UserTable>;

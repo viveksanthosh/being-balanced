@@ -1,11 +1,20 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import pg from "pg";
+import { Kysely, PostgresDialect } from "kysely";
 
-const queryClient = postgres({
-  database: process.env.DB_NAME,
-  host: "localhost",
-  port: 5444,
-  username: process.env.DB_USER,
+import { Database } from "./schemas";
+
+const dialect = new PostgresDialect({
+  pool: new pg.Pool({
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT as unknown as number,
+    user: process.env.DB_USER,
+    max: process.env.DB_CONNECTIONS as unknown as number,
+  }),
 });
 
-queryClient`select * from users`.then(console.log);
+export const db = new Kysely<Database>({
+  dialect,
+});
+
+db.selectFrom("users").select("email").executeTakeFirst().then(console.log);

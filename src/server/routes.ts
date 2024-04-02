@@ -1,10 +1,16 @@
-import { Application, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
+import { createUser } from "./services/UserService";
 const router = Router();
 
-router.post("/test", (req: Request, res: Response) => {
-  console.log(req.body);
+router.post("/user", async (req: Request, res: Response) => {
+  const user = req.body;
 
-  res.send("connecteeed");
+  try {
+    const result = await createUser(user);
+    console.log(result);
+  } catch (e) {}
+
+  res.send(200);
 });
 
 export default router;
