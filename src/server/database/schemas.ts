@@ -17,6 +17,6 @@ export interface UserTable {
 //
 // Most of the time you should trust the type inference and not use explicit
 // types at all. These types can be useful when typing function arguments.
-export type Person = Selectable<UserTable>;
-export type NewPerson = Insertable<UserTable>;
-export type PersonUpdate = Updateable<UserTable>;
+export type QueryUsers = Selectable<UserTable>;
+export type InsertUsers = Insertable<UserTable>;
+export type UpdateUsers = Updateable<UserTable>;

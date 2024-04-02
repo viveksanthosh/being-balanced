@@ -1,8 +1,6 @@
-import { UserPayload } from "../types/User";
+import { db } from "../database";
+import { InsertUsers } from "../database/schemas";
 
-export function createUser(user: UserPayload) {
-  //   return UserModel.insertMany({
-  //     email: user.email,
-  //     password: user.password,
-  //   });
+export function createUser(user: InsertUsers) {
+  return db.insertInto("users").values(user).executeTakeFirstOrThrow();
 }
