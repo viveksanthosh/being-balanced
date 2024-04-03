@@ -1,5 +1,4 @@
 const path = require("path");
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
   entry: "./src/server/index.ts",
@@ -19,12 +18,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new NodePolyfillPlugin()],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "server.js",
+    filename: "server.cjs",
     path: path.resolve(__dirname, "dist"),
   },
   target: "node",
