@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import express from "./express-plugin"; //Add this
+import express from "./express-plugin";
+import sassDts from "vite-plugin-sass-dts";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), express("src/server")],
+  plugins: [react(), express("src/server"), sassDts()],
 });
