@@ -1,4 +1,6 @@
 declare const classNames: {
-  readonly constiner: "constiner";
+  readonly container: "container";
+  readonly showError: "showError";
+  readonly hideError: "hideError";
 };
 export = classNames;

@@ -1,3 +1,11 @@
-.constiner{
-    display: flex;
+.container {
+  padding-top: calc(var(--pico-spacing) * 2);
+}
+
+.showError {
+  opacity: 1;
+}
+
+.hideError {
+  opacity: 0;
 }
